@@ -123,11 +123,14 @@
                 // remove required asterisk (*)
                 this.element.find('sup').toggle(this.isReadOnly);
                 for (let editor in this.form) {
-                    if (this.form[editor].widgetName) {
-
-                        try {
+                    try {
+                        if (this.form[editor].widgetName) {
                             Serenity.EditorUtils.setReadOnly(this.form[editor], this.isReadOnly);
-                        } catch { }
+                        }
+                    }
+                    catch (e) {
+                        this.element.find('.' + editor).addClass('disabled');
+                        this.element.find('.' + editor + ' > .btn').addClass('disabled');
                     }
                 }
 
